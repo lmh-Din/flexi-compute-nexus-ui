@@ -9,6 +9,10 @@ import Layout from "@/components/layout/Layout";
 import Index from "./pages/Index";
 import Login from "./pages/Login";
 import NotFound from "./pages/NotFound";
+import AppStore from "./pages/AppStore";
+import MyInstances from "./pages/MyInstances";
+import Billing from "./pages/Billing";
+import HostDevices from "./pages/HostDevices";
 
 const queryClient = new QueryClient();
 
@@ -64,10 +68,10 @@ const App = () => (
               
               {/* Protected Routes */}
               <Route path="/devices" element={<ProtectedRoute><Index /></ProtectedRoute>} />
-              <Route path="/apps" element={<ProtectedRoute><Index /></ProtectedRoute>} />
-              <Route path="/my-devices" element={<ProtectedRoute><Index /></ProtectedRoute>} />
-              <Route path="/billing" element={<ProtectedRoute><Index /></ProtectedRoute>} />
-              <Route path="/host-devices" element={<ProtectedRoute><Index /></ProtectedRoute>} />
+              <Route path="/apps" element={<ProtectedRoute><AppStore /></ProtectedRoute>} />
+              <Route path="/my-devices" element={<ProtectedRoute><MyInstances /></ProtectedRoute>} />
+              <Route path="/billing" element={<ProtectedRoute><Billing /></ProtectedRoute>} />
+              <Route path="/host-devices" element={<ProtectedRoute><HostDevices /></ProtectedRoute>} />
               <Route path="/admin" element={<ProtectedRoute><Index /></ProtectedRoute>} />
               
               {/* Catch-all route */}

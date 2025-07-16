@@ -31,9 +31,9 @@ const Navbar: React.FC = () => {
   const isActive = (path: string) => location.pathname === path;
 
   const userNavItems = [
-    { name: '设备市场', path: '/devices', icon: Cpu },
+    { name: '算力市场', path: '/devices', icon: Cpu },
     { name: '应用商店', path: '/apps', icon: Grid3X3 },
-    { name: '我的设备', path: '/my-devices', icon: ShoppingCart },
+    { name: '我的实例', path: '/my-devices', icon: ShoppingCart },
     { name: '账单管理', path: '/billing', icon: BarChart3 },
   ];
 

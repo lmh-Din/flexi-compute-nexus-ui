@@ -25,11 +25,11 @@ const Index = () => {
   const getPageTitle = () => {
     switch (location.pathname) {
       case '/devices':
-        return '设备市场';
+        return '算力市场';
       case '/apps':
         return '应用商店';
       case '/my-devices':
-        return '我的设备';
+        return '我的实例';
       case '/billing':
         return '账单管理';
       case '/host-devices':
@@ -68,7 +68,7 @@ const Index = () => {
             <div className="text-center">
               <h1 className="text-4xl sm:text-6xl font-bold mb-6">
                 <span className="bg-gradient-to-r from-primary via-accent to-primary bg-clip-text text-transparent">
-                  云算力设备市场
+                  云算力市场
                 </span>
               </h1>
               <p className="text-xl text-muted-foreground mb-8 max-w-3xl mx-auto">
