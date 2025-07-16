@@ -2,41 +2,73 @@
 @tailwind components;
 @tailwind utilities;
 
-/* Definition of the design system. All colors, gradients, fonts, etc should be defined here. 
-All colors MUST be HSL.
-*/
+/* FlexiCompute Design System - Professional Cloud Computing Platform */
 
 @layer base {
   :root {
-    --background: 0 0% 100%;
-    --foreground: 222.2 84% 4.9%;
+    /* Background System */
+    --background: 225 15% 4%;
+    --background-secondary: 225 15% 6%;
+    --background-tertiary: 225 15% 8%;
+    --foreground: 210 20% 98%;
 
-    --card: 0 0% 100%;
-    --card-foreground: 222.2 84% 4.9%;
+    /* Card System */
+    --card: 225 15% 6%;
+    --card-secondary: 225 15% 8%;
+    --card-foreground: 210 20% 98%;
 
-    --popover: 0 0% 100%;
-    --popover-foreground: 222.2 84% 4.9%;
+    /* Primary Brand Colors - Deep Blue to Purple Gradient */
+    --primary: 230 50% 45%;
+    --primary-hover: 230 50% 50%;
+    --primary-foreground: 210 20% 98%;
+    
+    /* Secondary - Professional Gray */
+    --secondary: 225 15% 12%;
+    --secondary-hover: 225 15% 15%;
+    --secondary-foreground: 210 20% 98%;
 
-    --primary: 222.2 47.4% 11.2%;
-    --primary-foreground: 210 40% 98%;
+    /* Accent - Cyan for highlights */
+    --accent: 190 80% 50%;
+    --accent-hover: 190 80% 55%;
+    --accent-foreground: 225 15% 4%;
 
-    --secondary: 210 40% 96.1%;
-    --secondary-foreground: 222.2 47.4% 11.2%;
+    /* Status Colors */
+    --success: 142 76% 36%;
+    --success-foreground: 210 20% 98%;
+    --warning: 48 96% 53%;
+    --warning-foreground: 225 15% 4%;
+    --destructive: 0 84% 60%;
+    --destructive-foreground: 210 20% 98%;
 
-    --muted: 210 40% 96.1%;
-    --muted-foreground: 215.4 16.3% 46.9%;
+    /* Muted Elements */
+    --muted: 225 15% 10%;
+    --muted-foreground: 215 20% 65%;
 
-    --accent: 210 40% 96.1%;
-    --accent-foreground: 222.2 47.4% 11.2%;
+    /* Borders and Inputs */
+    --border: 225 15% 15%;
+    --input: 225 15% 12%;
+    --ring: 230 50% 45%;
 
-    --destructive: 0 84.2% 60.2%;
-    --destructive-foreground: 210 40% 98%;
+    /* Popover */
+    --popover: 225 15% 6%;
+    --popover-foreground: 210 20% 98%;
 
-    --border: 214.3 31.8% 91.4%;
-    --input: 214.3 31.8% 91.4%;
-    --ring: 222.2 84% 4.9%;
+    /* Design Tokens */
+    --radius: 0.75rem;
+    
+    /* Gradients */
+    --gradient-primary: linear-gradient(135deg, hsl(230 50% 45%), hsl(270 50% 50%));
+    --gradient-accent: linear-gradient(135deg, hsl(190 80% 50%), hsl(200 80% 60%));
+    --gradient-glass: linear-gradient(135deg, hsl(225 15% 8% / 0.8), hsl(225 15% 12% / 0.4));
+    
+    /* Shadows */
+    --shadow-glow: 0 0 30px hsl(230 50% 45% / 0.3);
+    --shadow-card: 0 8px 32px hsl(225 15% 0% / 0.3);
+    --shadow-elevated: 0 16px 48px hsl(225 15% 0% / 0.4);
 
-    --radius: 0.5rem;
+    /* Animations */
+    --transition-smooth: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    --transition-bounce: all 0.3s cubic-bezier(0.68, -0.55, 0.265, 1.55);
 
     --sidebar-background: 0 0% 98%;
 
@@ -100,6 +132,81 @@ All colors MUST be HSL.
   }
 
   body {
-    @apply bg-background text-foreground;
+    @apply bg-background text-foreground font-sans antialiased;
+  }
+}
+
+@layer components {
+  /* Glass Effect Components */
+  .glass-card {
+    @apply bg-gradient-to-br from-white/5 to-white/[0.02] backdrop-blur-xl border border-white/10;
+  }
+
+  .glass-nav {
+    @apply bg-gradient-to-r from-background/80 to-background/60 backdrop-blur-2xl border-b border-white/10;
+  }
+
+  /* Button Variants */
+  .btn-glow {
+    @apply bg-gradient-to-r from-primary to-accent shadow-[0_0_20px_hsl(var(--primary)/0.4)] hover:shadow-[0_0_30px_hsl(var(--primary)/0.6)] transition-all duration-300;
+  }
+
+  .btn-gradient {
+    @apply bg-gradient-to-r from-primary to-primary-hover hover:from-primary-hover hover:to-accent;
+  }
+
+  /* Status Indicators */
+  .status-available {
+    @apply text-success bg-success/10 border-success/20;
+  }
+
+  .status-rented {
+    @apply text-warning bg-warning/10 border-warning/20;
+  }
+
+  .status-offline {
+    @apply text-muted-foreground bg-muted/20 border-muted/30;
+  }
+
+  /* Animations */
+  .animate-glow {
+    animation: glow 2s ease-in-out infinite alternate;
+  }
+
+  .animate-float {
+    animation: float 3s ease-in-out infinite;
+  }
+
+  .animate-slide-up {
+    animation: slideUp 0.5s ease-out;
+  }
+}
+
+@keyframes glow {
+  from {
+    box-shadow: 0 0 20px hsl(var(--primary) / 0.4);
+  }
+  to {
+    box-shadow: 0 0 40px hsl(var(--primary) / 0.8);
+  }
+}
+
+@keyframes float {
+  0%, 100% {
+    transform: translateY(0px);
+  }
+  50% {
+    transform: translateY(-10px);
+  }
+}
+
+@keyframes slideUp {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
   }
 }
