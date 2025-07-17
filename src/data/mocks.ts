@@ -210,7 +210,8 @@ export const mockTemplates: ApplicationTemplate[] = [
     environmentVariables: {
       'WEBUI_PORT': '7860',
       'COMMANDLINE_ARGS': '--listen --enable-insecure-extension-access'
-    }
+    },
+    isActive: true
   },
   { 
     id: 'app-2', 
@@ -230,7 +231,8 @@ export const mockTemplates: ApplicationTemplate[] = [
     environmentVariables: {
       'MYSQL_ROOT_PASSWORD': 'flexicompute123',
       'MYSQL_DATABASE': 'app_db'
-    }
+    },
+    isActive: true
   },
   {
     id: 'app-3',
@@ -249,7 +251,8 @@ export const mockTemplates: ApplicationTemplate[] = [
     ports: [8888],
     environmentVariables: {
       'JUPYTER_ENABLE_LAB': 'yes'
-    }
+    },
+    isActive: true
   },
   {
     id: 'app-4',
@@ -269,7 +272,8 @@ export const mockTemplates: ApplicationTemplate[] = [
     environmentVariables: {
       'MODEL_PATH': '/models/chatglm-6b',
       'API_PORT': '8000'
-    }
+    },
+    isActive: false
   },
   {
     id: 'app-5',
@@ -288,7 +292,8 @@ export const mockTemplates: ApplicationTemplate[] = [
     ports: [8080],
     environmentVariables: {
       'PASSWORD': 'flexicompute'
-    }
+    },
+    isActive: true
   }
 ];
 

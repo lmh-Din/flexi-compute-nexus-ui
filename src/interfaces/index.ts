@@ -75,6 +75,7 @@ export interface ApplicationTemplate {
   installScript?: string;
   ports: number[];
   environmentVariables: Record<string, string>;
+  isActive: boolean;
 }
 
 export interface RentalOrder {

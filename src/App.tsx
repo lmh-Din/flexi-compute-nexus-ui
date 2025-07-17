@@ -13,6 +13,7 @@ import AppStore from "./pages/AppStore";
 import MyInstances from "./pages/MyInstances";
 import Billing from "./pages/Billing";
 import HostDevices from "./pages/HostDevices";
+import Admin from "./pages/Admin";
 
 const queryClient = new QueryClient();
 
@@ -72,7 +73,7 @@ const App = () => (
               <Route path="/my-devices" element={<ProtectedRoute><MyInstances /></ProtectedRoute>} />
               <Route path="/billing" element={<ProtectedRoute><Billing /></ProtectedRoute>} />
               <Route path="/host-devices" element={<ProtectedRoute><HostDevices /></ProtectedRoute>} />
-              <Route path="/admin" element={<ProtectedRoute><Index /></ProtectedRoute>} />
+              <Route path="/admin" element={<ProtectedRoute><Admin /></ProtectedRoute>} />
               
               {/* Catch-all route */}
               <Route path="*" element={<NotFound />} />
