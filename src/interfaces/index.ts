@@ -20,12 +20,16 @@ export interface HostedDevice {
   id: string;
   ownerId: string;
   name: string;
+  type: 'CPU' | 'GPU'; // 设备类型
   cpuCores: number;
   ramGB: number;
   gpuModel?: string;
+  gpuCount?: number; // GPU数量
   storageGB: number;
   status: 'AVAILABLE' | 'RENTED' | 'OFFLINE' | 'MAINTENANCE';
   pricePerHour: number;
+  pricePerCore?: number; // CPU设备：每核心每小时价格
+  pricePerGpu?: number; // GPU设备：每卡每小时价格
   recommendedPrice?: number;
   connectionType: 'SSH' | 'MANUAL';
   location: string;
