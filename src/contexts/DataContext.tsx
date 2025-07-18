@@ -21,11 +21,13 @@ interface DataContextType {
   orders: RentalOrder[];
   stats: PlatformStats;
   chatMessages: ChatMessage[];
+  favoriteDevices: string[];
   
   // Device operations
   addDevice: (device: Omit<HostedDevice, 'id' | 'createdAt' | 'lastActive'>) => void;
   updateDevice: (id: string, updates: Partial<HostedDevice>) => void;
   rentDevice: (deviceId: string, userId: string, duration: number) => void;
+  toggleFavoriteDevice: (deviceId: string) => void;
   
   // Template operations
   addTemplate: (template: Omit<ApplicationTemplate, 'id'>) => void;
@@ -60,6 +62,7 @@ export const DataProvider: React.FC<{ children: React.ReactNode }> = ({ children
   const [orders, setOrders] = useState<RentalOrder[]>(initialOrders);
   const [stats, setStats] = useState<PlatformStats>(mockPlatformStats);
   const [chatMessages, setChatMessages] = useState<ChatMessage[]>(mockChatMessages);
+  const [favoriteDevices, setFavoriteDevices] = useState<string[]>([]);
 
   // Device operations
   const addDevice = useCallback((deviceData: Omit<HostedDevice, 'id' | 'createdAt' | 'lastActive'>) => {
@@ -157,6 +160,15 @@ export const DataProvider: React.FC<{ children: React.ReactNode }> = ({ children
     }]);
   }, []);
 
+  // Favorite operations
+  const toggleFavoriteDevice = useCallback((deviceId: string) => {
+    setFavoriteDevices(prev => 
+      prev.includes(deviceId) 
+        ? prev.filter(id => id !== deviceId)
+        : [...prev, deviceId]
+    );
+  }, []);
+
   // Stats
   const updateStats = useCallback((updates: Partial<PlatformStats>) => {
     setStats(prev => ({ ...prev, ...updates }));
@@ -168,9 +180,11 @@ export const DataProvider: React.FC<{ children: React.ReactNode }> = ({ children
     orders,
     stats,
     chatMessages,
+    favoriteDevices,
     addDevice,
     updateDevice,
     rentDevice,
+    toggleFavoriteDevice,
     addTemplate,
     updateTemplate,
     deleteTemplate,

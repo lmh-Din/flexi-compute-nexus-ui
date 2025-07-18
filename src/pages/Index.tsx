@@ -14,13 +14,26 @@ import {
   Clock,
   Users,
   TrendingUp,
-  Sparkles
+  Sparkles,
+  Heart
 } from 'lucide-react';
 
 const Index = () => {
   const location = useLocation();
   const { user } = useAuth();
-  const { devices, stats } = useData();
+  const { devices, stats, favoriteDevices, toggleFavoriteDevice } = useData();
+
+  // Sort devices to show favorites first
+  const sortedDevices = React.useMemo(() => {
+    return [...devices].sort((a, b) => {
+      const aIsFavorite = favoriteDevices.includes(a.id);
+      const bIsFavorite = favoriteDevices.includes(b.id);
+      
+      if (aIsFavorite && !bIsFavorite) return -1;
+      if (!aIsFavorite && bIsFavorite) return 1;
+      return 0;
+    });
+  }, [devices, favoriteDevices]);
 
   const getPageTitle = () => {
     switch (location.pathname) {
@@ -116,13 +129,36 @@ const Index = () => {
           </div>
           
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-            {devices.slice(0, 6).map((device) => (
-              <Card key={device.id} className="glass-card hover:shadow-elevated transition-all duration-300 group">
+            {sortedDevices.slice(0, 6).map((device) => (
+              <Card key={device.id} className="glass-card hover:shadow-elevated transition-all duration-300 group relative">
                 <CardHeader>
                   <div className="flex items-center justify-between">
                     <CardTitle className="text-lg">{device.name}</CardTitle>
-                    {getStatusBadge(device.status)}
+                    <div className="flex items-center gap-2">
+                      <Button
+                        variant="ghost"
+                        size="sm"
+                        onClick={() => toggleFavoriteDevice(device.id)}
+                        className="p-1 h-8 w-8"
+                      >
+                        <Heart 
+                          className={`h-4 w-4 transition-colors ${
+                            favoriteDevices.includes(device.id) 
+                              ? 'fill-red-500 text-red-500' 
+                              : 'text-muted-foreground hover:text-red-500'
+                          }`} 
+                        />
+                      </Button>
+                      {getStatusBadge(device.status)}
+                    </div>
                   </div>
+                  {favoriteDevices.includes(device.id) && (
+                    <div className="absolute top-2 left-2">
+                      <Badge variant="secondary" className="text-xs">
+                        已收藏
+                      </Badge>
+                    </div>
+                  )}
                   <CardDescription className="flex items-center text-sm">
                     <MapPin className="w-4 h-4 mr-1" />
                     {device.location}
